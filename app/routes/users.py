@@ -9,4 +9,25 @@ def get_users():
     format_type = request.args.get('format', 'json')
     with open('data/users.json') as f:
         users = json.load(f)
+        
+    id = request.args.get('id')
+    if id:
+        users = list(filter(lambda x: x['id'] == int(id), users))
+        
+    username = request.args.get('username')
+    if username:
+        users = list(filter(lambda x: x['username'] == username, users))
+
+    email = request.args.get('email')
+    if email:
+        users = list(filter(lambda x: x['email'] == email, users))
+        
+    first_name = request.args.get('first_name')
+    if first_name:
+        users = list(filter(lambda x: x['first_name'] == first_name, users))
+        
+    last_name = request.args.get('last_name')
+    if last_name:
+        users = list(filter(lambda x: x['last_name'] == last_name, users))
+        
     return format_response(users, format_type)

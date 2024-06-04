@@ -62,3 +62,48 @@ How you approach this task is completely up to you. The API should respond in RP
 We’re not concerned if it’s not finished, how you tackle the problem is more important for us to see. – if you are able to put it somewhere we can get to – we would suggest GitHub we can discuss this in detail at your interview.
 
 Please provide details in the README of how to run your code and your thinking whilst working on this project.
+
+
+
+
+========================
+
+1. Clone the repository
+- git clone https://github.com/janelleuy/ncc_group_assessment.git
+
+2. Navigate to the project repository
+- cd vulnerability_scan_api
+
+3. Install the dependencies
+- pip install -r requirements.txt
+
+4. Run the application
+- python3.10 run.py
+
+# API ENDPOINTS #
+Additional filter for all endpoints: format = json(default), yaml, xml
+
+- `GET /users` - Returns a list of users.
+    - filters:
+        - id
+        - username
+        - email
+        - first_name
+        - last_name
+
+- `GET /scans` - Returns a list of scans.
+    - filters:
+        - id
+        - requested_by
+        - status
+
+- `GET /assets` - Returns a list of assets.
+    - filters:
+        - id
+        - name
+
+- `GET /vulnerabilities` - Returns a list of vulnerabilities.
+    - filters:
+        - id
+        - from_scan
+        - severity
