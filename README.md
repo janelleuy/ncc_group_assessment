@@ -69,16 +69,23 @@ Please provide details in the README of how to run your code and your thinking w
 ========================
 
 1. Clone the repository
-- git clone https://github.com/janelleuy/ncc_group_assessment.git
+
+`git clone https://github.com/janelleuy/ncc_group_assessment.git`
+
 
 2. Navigate to the project repository
-- cd vulnerability_scan_api
+
+`cd vulnerability_scan_api`
+
 
 3. Install the dependencies
-- pip install -r requirements.txt
+
+`pip install -r requirements.txt`
+
 
 4. Run the application
-- python3.10 run.py
+
+`python3.10 run.py`
 
 # API ENDPOINTS #
 Additional filter for all endpoints: format = json(default), yaml, xml
