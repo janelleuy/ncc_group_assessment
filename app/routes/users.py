@@ -1,14 +1,13 @@
 from flask import Blueprint, request
-import json
 from app.utils.formatters import format_response
+from app.utils.data_loader import load_data
 
 users_bp = Blueprint('users', __name__)
 
 @users_bp.route('/users', methods=['GET'])
 def get_users():
     format_type = request.args.get('format', 'json')
-    with open('data/users.json') as f:
-        users = json.load(f)
+    users = load_data('users')
         
     id = request.args.get('id')
     if id:

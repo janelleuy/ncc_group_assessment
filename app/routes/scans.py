@@ -1,14 +1,13 @@
 from flask import Blueprint, request
-import json
 from app.utils.formatters import format_response
+from app.utils.data_loader import load_data
 
 scans_bp = Blueprint('scans', __name__)
 
 @scans_bp.route('/scans', methods=['GET'])
 def get_scans():
     format_type = request.args.get('format', 'json')
-    with open('data/scans.json') as f:
-        scans = json.load(f)
+    scans = load_data('scans')
         
     id = request.args.get('id')
     if id:

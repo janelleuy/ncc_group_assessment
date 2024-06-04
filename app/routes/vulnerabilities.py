@@ -1,14 +1,13 @@
 from flask import Blueprint, request
-import json
 from app.utils.formatters import format_response
+from app.utils.data_loader import load_data
 
 vulnerabilities_bp = Blueprint('vulnerabilities', __name__)
 
 @vulnerabilities_bp.route('/vulnerabilities', methods=['GET'])
 def get_vulnerabilities():
     format_type = request.args.get('format', 'json')
-    with open('data/vulnerabilities.json') as f:
-        vulnerabilities = json.load(f)
+    vulnerabilities = load_data('vulnerabilities')
         
     id = request.args.get('id')
     if id:
