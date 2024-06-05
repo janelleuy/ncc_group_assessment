@@ -1,32 +1,33 @@
 from flask import Blueprint, request
 from app.utils.formatters import format_response
 from app.utils.data_loader import load_data
+from app.utils.filters import *
 
 users_bp = Blueprint('users', __name__)
 
 @users_bp.route('/users', methods=['GET'])
 def get_users():
     format_type = request.args.get('format', 'json')
-    users = load_data('users')
+    data = load_data('users')
         
     id = request.args.get('id')
     if id:
-        users = list(filter(lambda x: x['id'] == int(id), users))
+        data = int_filter('id', id, data)
         
     username = request.args.get('username')
     if username:
-        users = list(filter(lambda x: x['username'] == username, users))
+        data = string_filter('username', username, data)
 
     email = request.args.get('email')
     if email:
-        users = list(filter(lambda x: x['email'] == email, users))
-        
+        data = string_filter('email', email, data)
+
     first_name = request.args.get('first_name')
     if first_name:
-        users = list(filter(lambda x: x['first_name'] == first_name, users))
-        
+        data = string_filter('first_name', first_name, data)
+
     last_name = request.args.get('last_name')
     if last_name:
-        users = list(filter(lambda x: x['last_name'] == last_name, users))
-        
-    return format_response(users, format_type)
+        data = string_filter('last_name', last_name, data)
+
+    return format_response(data, format_type)

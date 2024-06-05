@@ -1,24 +1,25 @@
 from flask import Blueprint, request
 from app.utils.formatters import format_response
 from app.utils.data_loader import load_data
+from app.utils.filters import *
 
 vulnerabilities_bp = Blueprint('vulnerabilities', __name__)
 
 @vulnerabilities_bp.route('/vulnerabilities', methods=['GET'])
 def get_vulnerabilities():
     format_type = request.args.get('format', 'json')
-    vulnerabilities = load_data('vulnerabilities')
+    data = load_data('vulnerabilities')
         
     id = request.args.get('id')
     if id:
-        vulnerabilities = list(filter(lambda x: x['id'] == int(id), vulnerabilities))
-        
+        data = int_filter('id', id, data)
+    
     from_scan = request.args.get('from_scan')
     if from_scan:
-        vulnerabilities = list(filter(lambda x: x['from_scan'] == int(from_scan), vulnerabilities))
-        
+        data = int_filter('from_scan', from_scan, data)
+
     severity = request.args.get('severity')
     if severity:
-        vulnerabilities = list(filter(lambda x: x['severity'] == severity, vulnerabilities))
-         
-    return format_response(vulnerabilities, format_type)
+        data = string_filter('severity', severity, data)
+
+    return format_response(data, format_type)
